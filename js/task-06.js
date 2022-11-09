@@ -1,19 +1,18 @@
-const refs = {
-    input: document.querySelector('#validation-input'),
 
-}
 
-function onChangeColor(event) {
-    const longContent = event.currentTarget.value.length;
-    const dataLength = event.currentTarget.dataset.length;
+const inputRef = document.querySelector('#validation-input');
 
-    if (longContent >= dataLength) {
-        refs.input.classList.remove(`invalid`);
-        refs.input.classList.add(`valid`);
-    } if (longContent < dataLength) {
-        refs.input.classList.remove(`valid`);
-        refs.input.classList.add(`invalid`);  
+const symbolLength = Number(inputRef.dataset.length);
+
+const onInputBlurAdd = event => {
+    if (event.currentTarget.value.length === symbolLength) {
+        inputRef.classList.add('valid');
+        inputRef.classList.remove('invalid');
     }
-    };
+    else {
+        inputRef.classList.add('invalid');
+        inputRef.classList.remove('valid');
+    }
+};
 
-refs.input.addEventListener(`blur`, onChangeColor);
+inputRef.addEventListener('blur', onInputBlurAdd);
